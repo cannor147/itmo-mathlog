@@ -4,6 +4,8 @@ import my.util.LemmaUtil;
 import my.util.LogicUtil;
 import util.StringUtil;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -176,10 +178,10 @@ public class Task6 {
     };
     
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int x = scanner.nextInt();
-        int y = scanner.nextInt();
+        int x = reader.read();
+        int y = reader.read();
         Proof proof = getProof(x, y);
         List<ProofLine> lines = proof.getLines();
 

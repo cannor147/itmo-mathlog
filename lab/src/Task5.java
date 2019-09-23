@@ -3,10 +3,11 @@ import my.Theorem;
 import my.proofs.Proof;
 import my.proofs.ProofLine;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static my.theory.TheoryUtil.formalArithmetic;
@@ -18,8 +19,8 @@ public class Task5 {
         NONE
     }
 
-    private static final Mode mode = Mode.SIXTH_TASK;
-    private static final boolean write = true;
+    private static final Mode mode = Mode.NONE;
+    private static final boolean write = false;
     private static final boolean checkHypothesesFreeVariable = false;
 
     private static String correctExpr(String expr) {
@@ -47,14 +48,14 @@ public class Task5 {
     }
 
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         Theorem theorem;
         List<ProofLine> lines;
         Logical result;
         if (mode == Mode.SIXTH_TASK) {
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
+            int x = reader.read();
+            int y = reader.read();
             Proof proof = Task6.getProof(x, y);
             lines = proof.getLines();
             result = lines.get(lines.size() - 1).getExpression();
@@ -62,7 +63,7 @@ public class Task5 {
             theorem.setProof(proof);
         } else {
             List<Logical> hypotheses = new ArrayList<>();
-            String title = scanner.nextLine().replace("|-", "⊢");
+            String title = reader.readLine().replace("|-", "⊢");
             String[] header = title.split("⊢");
 
             int braceBalance = 0;
@@ -87,8 +88,9 @@ public class Task5 {
             theorem = formalArithmetic.createTheorem(result, hypotheses);
 
             lines = new ArrayList<>();
-            while (scanner.hasNextLine()) {
-                String str = correctExpr(scanner.nextLine());
+            String str;
+            while ((str = reader.readLine()) != null) {
+                str = correctExpr(str);
                 lines.add(new ProofLine(formalArithmetic.parse(str)));
             }
             theorem.setProof(new Proof(lines));
