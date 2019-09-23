@@ -1,5 +1,7 @@
+import expressions.Logical;
 import my.proofs.Proof;
 import my.proofs.ProofLine;
+import my.theory.ArithmeticTheory;
 import my.util.LemmaUtil;
 import my.util.LogicUtil;
 import util.StringUtil;
@@ -11,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static my.theory.TheoryUtil.formalArithmetic;
 
 public class Task6 {
     private static final String[] arithmeticHelper = {
@@ -185,11 +189,9 @@ public class Task6 {
         Proof proof = getProof(x, y);
         List<ProofLine> lines = proof.getLines();
 
-        int index = 0;
         for (ProofLine line : lines) {
-            index++;
-            System.out.print(index + ". ");
-            System.out.println(line.toString().replace("→", "->"));
+            Logical pep = formalArithmetic.parse(line.toString());
+            System.out.println(pep.toString().replace("→", "->").replace("’", "'"));
         }
     }
 

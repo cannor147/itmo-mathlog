@@ -76,9 +76,9 @@ public class ExpressionUtil {
             }
             return result;
         } else if (expression instanceof Quantifier) {
-            return ((Quantifier) expression).getName() +
+            return "(" + ((Quantifier) expression).getName() +
                     smartTransform(((Quantifier) expression).getVariable(), mode, braces) + "." +
-                    smartTransform(((Quantifier) expression).getExpression(), mode, braces);
+                    smartTransform(((Quantifier) expression).getExpression(), mode, braces) + ")";
         } else if (expression instanceof Variable) {
             return ((Variable) expression).getName();
         } else if (expression instanceof SubjectVariable) {

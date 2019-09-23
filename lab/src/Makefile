@@ -1,7 +1,7 @@
 all: compile
 
 compile:
-	javac Task3.java
+	javac Task5.java
 
 run:
-	java -Xmx512m Task3
+	java -Xmx512m Task5 < test503.new
