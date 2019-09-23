@@ -20,11 +20,11 @@ public class Task5 {
     }
 
     private static final Mode mode = Mode.NONE;
-    private static final boolean write = false;
+    private static final boolean write = true;
     private static final boolean checkHypothesesFreeVariable = false;
 
     private static String correctExpr(String expr) {
-        String result =  expr.replace("->", "→");
+        String result =  expr.replace("->", "→").replace("'", "’");
         if (mode == Mode.OLD_TESTS) {
             StringBuilder lol = new StringBuilder();
             boolean quantified = false;
@@ -54,8 +54,9 @@ public class Task5 {
         List<ProofLine> lines;
         Logical result;
         if (mode == Mode.SIXTH_TASK) {
-            int x = reader.read();
-            int y = reader.read();
+            String[] v = reader.readLine().split(" ");
+            int x = Integer.valueOf(v[0]);
+            int y = Integer.valueOf(v[1]);
             Proof proof = Task6.getProof(x, y);
             lines = proof.getLines();
             result = lines.get(lines.size() - 1).getExpression();

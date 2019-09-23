@@ -184,14 +184,16 @@ public class Task6 {
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int x = reader.read();
-        int y = reader.read();
+        String[] v = reader.readLine().split(" ");
+        int x = Integer.valueOf(v[0]);
+        int y = Integer.valueOf(v[1]);
         Proof proof = getProof(x, y);
         List<ProofLine> lines = proof.getLines();
 
+        System.out.println(x + " " + y);
         for (ProofLine line : lines) {
             Logical pep = formalArithmetic.parse(line.toString());
-            System.out.println(pep.toString().replace("→", "->").replace("’", "'"));
+            System.out.println(pep.toString().replace("→", "->"));
         }
     }
 
