@@ -1,13 +1,13 @@
 package expressions.subject;
 
-import expressions.ArgumentativeExpression;
-import expressions.util.Location;
 import expressions.Subjective;
+import expressions.SubjectivelyArgumentativeExpression;
+import expressions.util.Location;
 
 import java.util.Map;
 
 @SuppressWarnings({"unused"})
-public class Function extends ArgumentativeExpression<Subjective> implements Subjective {
+public class Function extends SubjectivelyArgumentativeExpression implements Subjective {
     private final String name;
     private boolean concrete = false;
 

@@ -16,11 +16,6 @@ public class TheoryUtil {
     private static final Character GAMMA = 'γ';
     public static final Character[] FIRST_GREEK_SYMBOLS = {ALPHA, BETA, GAMMA};
 
-    private static final Character LAMBDA = 'λ';
-    private static final Character MI = 'μ';
-    private static final Character NI = 'ν';
-    private static final Character[] MIDDLE_GREEK_SYMBOLS = {LAMBDA, MI, NI};
-
     private static final Character XI = 'χ';
     private static final Character PSY = 'ψ';
     private static final Character OMEGA = 'ω';
@@ -41,14 +36,14 @@ public class TheoryUtil {
     private static final PreAxiom firstPredicate = new PreAxiom("1P", "(@χ.α)→α", "α[χ]#1:χ", "α[χ]#2:*");
     private static final PreAxiom secondPredicate = new PreAxiom("2P", "α→(?χ.α)", "α[χ]#1:*", "α[χ]#2:χ");
 
-    private static final PreAxiom firstArithmetic = new PreAxiom("1A", "(λ=μ)→(λ’=μ’)");
-    private static final PreAxiom secondArithmetic = new PreAxiom("2A", "(λ=μ)→((λ=ν)→(μ=ν))");
-    private static final PreAxiom thirdArithmetic = new PreAxiom("3A", "(λ’=μ’)→(λ=μ)");
-    private static final PreAxiom fourthArithmetic = new PreAxiom("4A", "!(λ’=0)");
-    private static final PreAxiom fifthArithmetic = new PreAxiom("5A", "(λ+μ’)=(λ+μ)’");
-    private static final PreAxiom sixthArithmetic = new PreAxiom("6A", "(λ+0)=λ");
-    private static final PreAxiom seventhArithmetic = new PreAxiom("7A", "(λ*0)=0");
-    private static final PreAxiom eighthArithmetic = new PreAxiom("8A", "(λ*μ’)=((λ*μ)+λ)");
+    private static final PreAxiom firstArithmetic = new PreAxiom("1A", "(a=b)→(a’=b’)");
+    private static final PreAxiom secondArithmetic = new PreAxiom("2A", "(a=b)→((a=c)→(b=c))");
+    private static final PreAxiom thirdArithmetic = new PreAxiom("3A", "(a’=b’)→(a=b)");
+    private static final PreAxiom fourthArithmetic = new PreAxiom("4A", "!(a’=0)");
+    private static final PreAxiom fifthArithmetic = new PreAxiom("5A", "(a+b’)=(a+b)’");
+    private static final PreAxiom sixthArithmetic = new PreAxiom("6A", "(a+0)=a");
+    private static final PreAxiom seventhArithmetic = new PreAxiom("7A", "(a*0)=0");
+    private static final PreAxiom eighthArithmetic = new PreAxiom("8A", "(a*b’)=((a*b)+a)");
     private static final PreAxiom ninthArithmetic = new PreAxiom("9A", "α&(@χ.(α→α))→α",
             "α[χ]#1:0", "α[χ]#2:χ", "α[χ]#3:χ’", "α[χ]#4:*");
 
@@ -78,9 +73,6 @@ public class TheoryUtil {
                 final char symbol = pattern.charAt(i);
                 if (Arrays.asList(FIRST_GREEK_SYMBOLS).contains(symbol)) {
                     metaVariables.put(symbol, Logical.class);
-                }
-                if (Arrays.asList(MIDDLE_GREEK_SYMBOLS).contains(symbol)) {
-                    metaVariables.put(symbol, SubjectVariable.class);
                 }
                 if (Arrays.asList(LAST_GREEK_SYMBOLS).contains(symbol)) {
                     metaVariables.put(symbol, SubjectVariable.class);

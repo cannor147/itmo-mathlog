@@ -1,14 +1,14 @@
 package expressions.predicates;
 
-import expressions.ArgumentativeExpression;
-import expressions.util.Location;
 import expressions.Logical;
 import expressions.Subjective;
+import expressions.SubjectivelyArgumentativeExpression;
+import expressions.util.Location;
 
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class Predicate extends ArgumentativeExpression<Subjective> implements Logical {
+public class Predicate extends SubjectivelyArgumentativeExpression implements Logical {
     private final String name;
     private boolean concrete = false;
 

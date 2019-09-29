@@ -20,7 +20,7 @@ public class Task5 {
     }
 
     private static final Mode mode = Mode.NONE;
-    private static final boolean write = true;
+    private static final boolean write = false;
     private static final boolean checkHypothesesFreeVariable = false;
 
     private static String correctExpr(String expr) {
@@ -55,8 +55,8 @@ public class Task5 {
         Logical result;
         if (mode == Mode.SIXTH_TASK) {
             String[] v = reader.readLine().split(" ");
-            int x = Integer.valueOf(v[0]);
-            int y = Integer.valueOf(v[1]);
+            int x = Integer.parseInt(v[0]);
+            int y = Integer.parseInt(v[1]);
             Proof proof = Task6.getProof(x, y);
             lines = proof.getLines();
             result = lines.get(lines.size() - 1).getExpression();

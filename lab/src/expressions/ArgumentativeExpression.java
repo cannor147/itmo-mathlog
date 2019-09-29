@@ -13,9 +13,8 @@ public abstract class ArgumentativeExpression<R extends Expression> extends Abst
     public abstract boolean isConcrete();
     public abstract Location getLocation();
 
-    @SafeVarargs
-    protected ArgumentativeExpression(R... arguments) {
-        this.arguments = Arrays.stream(arguments).collect(Collectors.toList());
+    ArgumentativeExpression(List<R> arguments) {
+        this.arguments = arguments;
     }
 
     public int getArity() {

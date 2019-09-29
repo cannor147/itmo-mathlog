@@ -4,7 +4,7 @@ compile:
 	javac Task5.java
 
 run:
-	java -Xmx512m Task5
+	java -Xmx512m Task5 < test11.new
 
 clean:
 	rm -f *.class

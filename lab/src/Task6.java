@@ -87,6 +87,8 @@ public class Task6 {
             "((0=0)→(0=0)→(0=0))→@b.@a.((a*b’)=((a*b)+a))",
             "(0=0)→(0=0)→(0=0)",
             "@b.@a.((a*b’)=((a*b)+a))",
+
+            "(@a.(!(a’=0)))→(!(y’=0))"
     };
 
     private static final String[] eq = {
@@ -185,15 +187,15 @@ public class Task6 {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         String[] v = reader.readLine().split(" ");
-        int x = Integer.valueOf(v[0]);
-        int y = Integer.valueOf(v[1]);
+        int x = Integer.parseInt(v[0]);
+        int y = Integer.parseInt(v[1]);
         Proof proof = getProof(x, y);
         List<ProofLine> lines = proof.getLines();
 
-        System.out.println(x + " " + y);
+        System.out.println("|- " + lines.get(lines.size() - 1));
         for (ProofLine line : lines) {
             Logical pep = formalArithmetic.parse(line.toString());
-            System.out.println(pep.toString().replace("→", "->"));
+            System.out.println(pep.toString().replace("→", "->").replace("’", "'"));
         }
     }
 
@@ -315,7 +317,6 @@ public class Task6 {
             String half = getNumber(k / 2);
             if (k != 0) {
                 String previous = getNumber((k - 2) / 2);
-                lines.add(new ProofLine("g+0=g"));
                 lines.add(new ProofLine("@a.(a+0=a)→(0’’*" + previous + "+0=0’’*" + previous + ")"));
                 lines.add(new ProofLine("0’’*" + previous + "+0=0’’*" + previous));
                 lines.add(new ProofLine("@b.@a.((a=b)→(a’=b’))→@a.((a=0’’*" + previous + ")→(a’=(0’’*" + previous + ")’))"));
@@ -329,7 +330,6 @@ public class Task6 {
                 lines.add(new ProofLine("0’’*" + previous + "+0’=(0’’*" + previous + "+0)’"));
                 lines.addAll(swap("(0’’*" + previous + "+0’)", "((0’’*" + previous + "+0)’)"));
                 lines.addAll(secondImpl("(0’’*" + previous + "+0)’", "0’’*" + previous + "+0’", "(0’’*" + previous + ")’"));
-                lines.add(new ProofLine("g+0=g"));
                 lines.add(new ProofLine("((0’’*" + previous + "+0)’=(0’’*" + previous + ")’)→(0’’*" + previous + "+0’=(0’’*" + previous + ")’)"));
                 lines.add(new ProofLine("0’’*" + previous + "+0’=(0’’*" + previous + ")’"));
                 lines.add(new ProofLine("@b.@a.((a=b)→(a’=b’))→@a.((a=(0’’*" + previous + ")’)→(a’=(0’’*" + previous + ")’’))"));
@@ -343,7 +343,6 @@ public class Task6 {
                 lines.add(new ProofLine("0’’*" + previous + "+0’’=(0’’*" + previous + "+0’)’"));
                 lines.addAll(swap("(0’’*" + previous + "+0’’)", "((0’’*" + previous + "+0’)’)"));
                 lines.addAll(secondImpl("(0’’*" + previous + "+0’)’", "0’’*" + previous + "+0’’", "(0’’*" + previous + ")’’"));
-                lines.add(new ProofLine("g+0=g"));
                 lines.add(new ProofLine("((0’’*" + previous + "+0’)’=(0’’*" + previous + ")’’)→(0’’*" + previous + "+0’’=(0’’*" + previous + ")’’)"));
                 lines.add(new ProofLine("0’’*" + previous + "+0’’=(0’’*" + previous + ")’’"));
                 lines.add(new ProofLine("@b.@a.((a*b’)=((a*b)+a))→@a.(a*" + half + "=a*" + previous + "+a)"));
@@ -352,11 +351,9 @@ public class Task6 {
                 lines.add(new ProofLine("0’’*" + half + "=0’’*" + previous + "+0’’"));
                 lines.addAll(swap("(0’’*" + half + ")", "(0’’*" + previous + "+0’’)"));
                 lines.addAll(secondImpl("0’’*" + previous + "+0’’", "(0’’*" + previous + ")’’", "0’’*" + half));
-                lines.add(new ProofLine("g+0=g"));
                 lines.add(new ProofLine("(0’’*" + previous + "+0’’=0’’*" + half + ")→((0’’*" + previous + ")’’=0’’*" + half + ")"));
                 lines.add(new ProofLine("(0’’*" + previous + ")’’=0’’*" + half + ""));
                 lines.addAll(secondImpl("(0’’*" + previous + ")’’", "0’’*" + half, full));
-                lines.add(new ProofLine("g+0=g"));
                 lines.add(new ProofLine("((0’’*" + previous + ")’’=" + full + ")→(0’’*" + half + "=" + full + ")"));
             } else {
                 lines.add(new ProofLine("@a.(a*0=0)→(0’’*0=0)"));
