@@ -3,6 +3,7 @@ package parser.impl;
 import exceptions.ParsingException;
 import expressions.Subjective;
 import expressions.constants.Constant;
+import expressions.predicates.Variable;
 import expressions.subject.Function;
 import expressions.subject.SubjectVariable;
 import expressions.subject.impl.Addition;
@@ -13,10 +14,22 @@ import parser.tokenizer.Token;
 import parser.tokenizer.Tokenizer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("SwitchStatementWithTooFewBranches")
 public class ArithmeticalParser implements SubjectiveParser {
+
+    public ArithmeticalParser(Map<String, SubjectVariable> subjectVariables, Map<String, Variable> variables) {
+        this.subjectVariables = subjectVariables;
+        this.variables = variables;
+    }
+
+    private Constant zero = new Constant(0);
+    private Map<String, SubjectVariable> subjectVariables;
+    private Map<String, Variable> variables;
+
     public Subjective parse(final String expr) {
         try {
             Tokenizer mTokenizer = new Tokenizer(expr);
@@ -69,7 +82,7 @@ public class ArithmeticalParser implements SubjectiveParser {
                 String name = mTokenizer.getName();
                 mTokenizer.nextToken();
                 if (name.equals("0")) {
-                    result = new Constant(0);
+                    result = zero;
                 } else if (mTokenizer.getCurrentToken() == Token.OPENING_BRACE) {
                     List<Subjective> arguments = new ArrayList<>();
                     arguments.add(addition(mTokenizer));
@@ -83,7 +96,13 @@ public class ArithmeticalParser implements SubjectiveParser {
                     mTokenizer.nextToken();
                     result = new Function(name, arguments.toArray(new Subjective[0]));
                 } else {
-                    result = new SubjectVariable(name);
+                    if (subjectVariables.containsKey(name)) {
+                        result = subjectVariables.get(name);
+                    } else {
+                        SubjectVariable variable = new SubjectVariable(name);
+                        subjectVariables.put(name, variable);
+                        result = variable;
+                    }
                 }
                 break;
             case OPENING_BRACE:

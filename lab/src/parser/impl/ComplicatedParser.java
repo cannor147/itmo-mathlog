@@ -3,6 +3,7 @@ package parser.impl;
 import exceptions.ParsingException;
 import expressions.Logical;
 import expressions.Subjective;
+import expressions.constants.Constant;
 import expressions.operations.impl.Conjunction;
 import expressions.operations.impl.Disjunction;
 import expressions.operations.impl.Implication;
@@ -18,12 +19,17 @@ import parser.tokenizer.Token;
 import parser.tokenizer.Tokenizer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("SwitchStatementWithTooFewBranches")
 public class ComplicatedParser implements LogicalParser {
-    private static final ArithmeticalParser arithmeticParser = new ArithmeticalParser();
-    
+
+    public static Map<String, SubjectVariable> subjectVariables = new HashMap<>();
+    public static Map<String, Variable> variables = new HashMap<>();
+    public static final ArithmeticalParser arithmeticParser = new ArithmeticalParser(subjectVariables, variables);
+
     private Tokenizer mTokenizer;
 
     public Logical parse(final String expr) {
@@ -125,7 +131,13 @@ public class ComplicatedParser implements LogicalParser {
                 mTokenizer.nextToken();
                 return new Predicate(name, arguments.toArray(new Subjective[0]));
             } else {
-                return new Variable(name);
+                if (variables.containsKey(name)) {
+                    return variables.get(name);
+                } else {
+                    Variable variable = new Variable(name);
+                    variables.put(name, variable);
+                    return variable;
+                }
             }
         } else {
             mTokenizer.apply(backup);
@@ -138,7 +150,13 @@ public class ComplicatedParser implements LogicalParser {
         if (mTokenizer.getCurrentToken() != Token.VAR) {
             throw new ParsingException("kek");
         }
-        SubjectVariable variable = new SubjectVariable(mTokenizer.getName());
+        SubjectVariable variable;
+        if (subjectVariables.containsKey(mTokenizer.getName())) {
+            variable = subjectVariables.get(mTokenizer.getName());
+        } else {
+            variable = new SubjectVariable(mTokenizer.getName());
+            subjectVariables.put(mTokenizer.getName(), variable);
+        }
 
         mTokenizer.nextToken();
         if (mTokenizer.getCurrentToken() != Token.DOT) {

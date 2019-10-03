@@ -14,12 +14,15 @@ import expressions.subject.SubjectVariable;
 import expressions.util.ExpressionUtil;
 import my.util.LogicUtil;
 import parser.impl.ArithmeticalParser;
+import parser.impl.ComplicatedParser;
 
 import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class Axiom {
-    private static final ArithmeticalParser arithmeticParser = new ArithmeticalParser();
+    private static final ComplicatedParser complicatedParser = new ComplicatedParser();
+    private static final ArithmeticalParser arithmeticParser =
+            new ArithmeticalParser(ComplicatedParser.subjectVariables, ComplicatedParser.variables);
 
     private final String name;
     private final Logical pattern;
