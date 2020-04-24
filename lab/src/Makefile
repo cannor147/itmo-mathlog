@@ -1,10 +1,10 @@
 all: compile
 
 compile:
-	javac Task5.java
+	javac Task2.java
 
 run:
-	java -Xmx512m Task5
+	java -Xmx512m Task2
 
 clean:
 	rm -f *.class

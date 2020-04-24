@@ -1,7 +1,7 @@
 package my;
 
 import expressions.Logical;
-import my.theory.TheoryUtil;
+import my.theory.PreAxiom;
 import parser.LogicalParser;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public abstract class Theory {
     private final LogicalParser parser;
     private final Axiom[] axioms;
 
-    protected Theory(LogicalParser parser, TheoryUtil.PreAxiom... axioms) {
+    protected Theory(LogicalParser parser, PreAxiom... axioms) {
         this.parser = parser;
         this.axioms = Arrays.stream(axioms).map(preAxiom -> new Axiom(preAxiom.getName(), parser.parse(preAxiom.getPattern()),
                 preAxiom.getMetaVariables(), preAxiom.getSubstitutions())).toArray(Axiom[]::new);

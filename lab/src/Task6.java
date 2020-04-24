@@ -1,7 +1,7 @@
 import expressions.Logical;
 import my.proofs.Proof;
 import my.proofs.ProofLine;
-import my.theory.ArithmeticTheory;
+import my.theory.FormalArithmetic;
 import my.util.LemmaUtil;
 import my.util.LogicUtil;
 import util.StringUtil;
@@ -11,10 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
-
-import static my.theory.TheoryUtil.formalArithmetic;
 
 public class Task6 {
     private static final String[] arithmeticHelper = {
@@ -185,6 +182,7 @@ public class Task6 {
     
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        FormalArithmetic formalArithmetic = FormalArithmetic.getInstance();
 
         String[] v = reader.readLine().split(" ");
         int x = Integer.parseInt(v[0]);

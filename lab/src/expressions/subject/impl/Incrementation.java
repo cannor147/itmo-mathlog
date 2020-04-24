@@ -1,6 +1,7 @@
 package expressions.subject.impl;
 
 import evaluators.ArithmeticEvaluator;
+import evaluators.Evaluators;
 import expressions.util.Location;
 import expressions.Subjective;
 import expressions.subject.Function;
@@ -8,7 +9,6 @@ import expressions.subject.Function;
 import java.util.Map;
 
 public class Incrementation extends Function {
-    private static ArithmeticEvaluator incrementation = new ArithmeticEvaluator("’", args -> args[0] + 1);
 
     public Incrementation(Subjective first) {
         super(first);
@@ -16,7 +16,7 @@ public class Incrementation extends Function {
 
     @Override
     public String getName() {
-        return incrementation.getSymbol();
+        return Evaluators.incrementation.getSymbol();
     }
 
     @Override
@@ -33,6 +33,6 @@ public class Incrementation extends Function {
     @Override
     public Integer evaluate(Map<String, Object> values) {
         Integer[] argumentValues = {(Integer) get(0).evaluate(values)};
-        return incrementation.evaluate(argumentValues);
+        return Evaluators.incrementation.evaluate(argumentValues);
     }
 }

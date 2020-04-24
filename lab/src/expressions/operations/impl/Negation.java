@@ -1,14 +1,13 @@
 package expressions.operations.impl;
 
-import evaluators.LogicEvaluator;
-import expressions.util.Location;
+import evaluators.Evaluators;
 import expressions.Logical;
 import expressions.operations.Operation;
+import expressions.util.Location;
 
 import java.util.Map;
 
 public class Negation extends Operation {
-    private static LogicEvaluator negation = new LogicEvaluator("!", args -> !args[0]);
 
     public Negation(Logical first) {
         super(first);
@@ -16,7 +15,7 @@ public class Negation extends Operation {
 
     @Override
     public String getName() {
-        return negation.getSymbol();
+        return Evaluators.negation.getSymbol();
     }
 
     @Override
@@ -32,6 +31,6 @@ public class Negation extends Operation {
     @Override
     public Boolean evaluate(Map<String, Object> values) {
         Boolean[] argumentValues = {get(0).evaluate(values)};
-        return negation.evaluate(argumentValues);
+        return Evaluators.negation.evaluate(argumentValues);
     }
 }

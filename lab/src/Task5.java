@@ -2,6 +2,7 @@ import expressions.Logical;
 import my.Theorem;
 import my.proofs.Proof;
 import my.proofs.ProofLine;
+import my.theory.FormalArithmetic;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static my.theory.TheoryUtil.formalArithmetic;
 
 public class Task5 {
     private enum Mode {
@@ -49,6 +48,7 @@ public class Task5 {
 
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        FormalArithmetic formalArithmetic = FormalArithmetic.getInstance();
 
         Theorem theorem;
         List<ProofLine> lines;

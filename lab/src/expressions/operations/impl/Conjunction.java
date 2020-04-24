@@ -1,22 +1,20 @@
 package expressions.operations.impl;
 
-import evaluators.LogicEvaluator;
-import expressions.util.Location;
+import evaluators.Evaluators;
 import expressions.Logical;
 import expressions.operations.Operation;
+import expressions.util.Location;
 
 import java.util.Map;
 
 public final class Conjunction extends Operation {
-    private static LogicEvaluator conjunction = new LogicEvaluator("&", args -> args[0] && args[1]);
-
     public Conjunction(Logical first, Logical second) {
         super(first, second);
     }
 
     @Override
     public String getName() {
-        return conjunction.getSymbol();
+        return Evaluators.conjunction.getSymbol();
     }
 
     @Override
@@ -32,6 +30,6 @@ public final class Conjunction extends Operation {
     @Override
     public Boolean evaluate(Map<String, Object> values) {
         Boolean[] argumentValues = {get(0).evaluate(values), get(1).evaluate(values)};
-        return conjunction.evaluate(argumentValues);
+        return Evaluators.conjunction.evaluate(argumentValues);
     }
 }

@@ -1,5 +1,6 @@
 package expressions.predicates.impl;
 
+import evaluators.Evaluators;
 import expressions.util.Location;
 import expressions.Subjective;
 import expressions.predicates.Predicate;
@@ -13,7 +14,7 @@ public class Equation extends Predicate {
 
     @Override
     public String getName() {
-        return "=";
+        return Evaluators.equality.getSymbol();
     }
 
     @Override
@@ -29,6 +30,7 @@ public class Equation extends Predicate {
 
     @Override
     public Boolean evaluate(Map<String, Object> values) {
-        return get(0).evaluate(values).equals(get(1).evaluate(values));
+        Object[] argumentValues = {get(0).evaluate(values), get(1).evaluate(values)};
+        return Evaluators.equality.evaluate(argumentValues);
     }
 }

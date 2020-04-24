@@ -1,14 +1,13 @@
 package expressions.operations.impl;
 
-import evaluators.LogicEvaluator;
-import expressions.util.Location;
+import evaluators.Evaluators;
 import expressions.Logical;
 import expressions.operations.Operation;
+import expressions.util.Location;
 
 import java.util.Map;
 
 public class Implication extends Operation {
-    private static LogicEvaluator implication = new LogicEvaluator("→", args -> !args[0] || args[1]);
 
     public Implication(Logical first, Logical second) {
         super(first, second);
@@ -16,7 +15,7 @@ public class Implication extends Operation {
 
     @Override
     public String getName() {
-        return implication.getSymbol();
+        return Evaluators.implication.getSymbol();
     }
 
     @Override
@@ -32,6 +31,6 @@ public class Implication extends Operation {
     @Override
     public Boolean evaluate(Map<String, Object> values) {
         Boolean[] argumentValues = {get(0).evaluate(values), get(1).evaluate(values)};
-        return implication.evaluate(argumentValues);
+        return Evaluators.implication.evaluate(argumentValues);
     }
 }

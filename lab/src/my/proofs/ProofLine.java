@@ -1,8 +1,8 @@
 package my.proofs;
 
 import expressions.Logical;
-
-import static my.theory.TheoryUtil.formalArithmetic;
+import my.theory.FormalArithmetic;
+import my.theory.PropositionalCalculus;
 
 public class ProofLine {
     private String expr;
@@ -21,7 +21,8 @@ public class ProofLine {
     public Logical getExpression() {
         if (expression == null) {
             // todo: replace with something more general
-            expression = formalArithmetic.parse(expr);
+            expression = PropositionalCalculus.getInstance().parse(expr);
+//            expression = FormalArithmetic.getInstance().parse(expr);
         }
         return expression;
     }

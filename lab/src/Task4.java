@@ -1,13 +1,13 @@
 import expressions.Logical;
 import my.Theorem;
+import my.theory.PropositionalCalculus;
 
 import java.util.Scanner;
-
-import static my.theory.TheoryUtil.propositionalCalculus;
 
 public class Task4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        PropositionalCalculus propositionalCalculus = PropositionalCalculus.getInstance();
         String str = scanner.nextLine().replace("->", "→");
 
         Logical expression = propositionalCalculus.parse(str);

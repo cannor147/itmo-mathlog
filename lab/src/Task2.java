@@ -2,6 +2,7 @@ import expressions.Logical;
 import my.Theorem;
 import my.proofs.Proof;
 import my.proofs.ProofLine;
+import my.theory.PropositionalCalculus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static my.theory.TheoryUtil.*;
-
 public class Task2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        PropositionalCalculus propositionalCalculus = PropositionalCalculus.getInstance();
 
         List<Logical> hypotheses = new ArrayList<>();
         String title = scanner.nextLine().replace("->", "→").replace("|-", "⊢");

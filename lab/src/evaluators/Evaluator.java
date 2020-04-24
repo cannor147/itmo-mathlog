@@ -3,11 +3,11 @@ package evaluators;
 import java.util.function.Function;
 
 @SuppressWarnings("WeakerAccess")
-public class Evaluator<T> {
+public class Evaluator<T, R> {
     private final String symbol;
-    private final Function<T[], T> evaluator;
+    private final Function<T[], R> evaluator;
 
-    public Evaluator(String symbol, Function<T[], T> evaluator) {
+    public Evaluator(String symbol, Function<T[], R> evaluator) {
         this.symbol = symbol;
         this.evaluator = evaluator;
     }
@@ -17,7 +17,7 @@ public class Evaluator<T> {
     }
 
     @SafeVarargs
-    public final T evaluate(T... arguments) {
+    public final R evaluate(T... arguments) {
         return evaluator.apply(arguments);
     }
 }
