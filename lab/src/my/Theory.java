@@ -41,7 +41,7 @@ public abstract class Theory {
     }
 
     public Theorem createTheorem(Logical expression) {
-        return new Theorem(this, expression, new ArrayList<>());
+        return createTheorem(expression, new ArrayList<>());
     }
 
     public Logical parse(String expr) {

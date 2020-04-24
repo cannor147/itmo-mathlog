@@ -1,10 +1,28 @@
 package expressions;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import expressions.util.Location;
 
 public abstract class SubjectivelyArgumentativeExpression extends ArgumentativeExpression<Subjective> {
-    protected SubjectivelyArgumentativeExpression(Subjective... arguments) {
-        super(Arrays.stream(arguments).collect(Collectors.toList()));
+    private final Subjective[] arguments;
+
+    public abstract String getName();
+    public abstract boolean isConcrete();
+    public abstract Location getLocation();
+
+    public SubjectivelyArgumentativeExpression(Subjective... arguments) {
+        this.arguments = arguments;
+    }
+
+    public int getArity() {
+        return arguments.length;
+    }
+
+    public Subjective get(int index) {
+        return arguments[index];
+    }
+
+    @SuppressWarnings("unused")
+    public void change(int index, Subjective expression) {
+        arguments[index] = expression;
     }
 }

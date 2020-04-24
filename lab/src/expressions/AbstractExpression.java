@@ -5,10 +5,10 @@ import expressions.util.ExpressionUtil;
 import java.util.Map;
 
 public abstract class AbstractExpression implements Comparable<Expression>, Expression {
-    private String cachedExpr;
+//    private String cachedExpr;
 
     public AbstractExpression() {
-        this.cachedExpr = null;
+//        this.cachedExpr = null;
     }
 
     public abstract Object evaluate(Map<String, Object> values);
@@ -30,10 +30,11 @@ public abstract class AbstractExpression implements Comparable<Expression>, Expr
 
     @Override
     public String toString() {
-        if (cachedExpr == null) {
-            cachedExpr = ExpressionUtil.transform(this);
-        }
-        return cachedExpr;
+//        if (cachedExpr == null) {
+//            cachedExpr = ExpressionUtil.transform(this);
+//        }
+//        return cachedExpr;
+        return ExpressionUtil.transform(this);
     }
 
     @Override

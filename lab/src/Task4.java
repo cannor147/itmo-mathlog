@@ -14,7 +14,6 @@ public class Task4 {
         try {
             Theorem theorem = propositionalCalculus.findMinimumHypotheses(expression);
             propositionalCalculus.generateProof(theorem);
-            theorem.setDescriptionPattern("#. ");
             theorem.specialWrite();
         } catch (Exception e) {
             System.out.println(":(");

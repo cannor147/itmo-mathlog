@@ -7,26 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class ArgumentativeExpression<R extends Expression> extends AbstractExpression {
-    private final List<R> arguments;
-
     public abstract String getName();
     public abstract boolean isConcrete();
     public abstract Location getLocation();
 
-    ArgumentativeExpression(List<R> arguments) {
-        this.arguments = arguments;
-    }
+    public abstract int getArity();
 
-    public int getArity() {
-        return arguments.size();
-    }
-
-    public R get(int index) {
-        return arguments.get(index);
-    }
+    public abstract R get(int index);
 
     @SuppressWarnings("unused")
-    public void change(int index, R expression) {
-        arguments.set(index, expression);
-    }
+    public abstract void change(int index, R expression);
 }
